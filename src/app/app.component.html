@@ -23,7 +23,7 @@
           </tr>
         </thead>
         <tbody>
-            <tr class="playlist-row" [class.table-active]="selected == playlist" 
+            <tr class="" [ngClass]="{'table-active': selected == playlist, 'playlist-row': true}" 
             [style.borderBottomColor]="playlist.color" 
             (click)="selected = playlist">
                 <td> 1 </td>
@@ -36,7 +36,7 @@
                 </td>
             </tr>
 
-            <tr (click)="selected = null" [class.table-active]="selected == null" >
+            <tr (click)="selected = null" [ngClass]="{'table-active': selected == null}" >
                 <td> 2 </td>
                 <td> Angular greatest Hits </td>
                 <td> 2 </td>
