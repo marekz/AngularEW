@@ -16,50 +16,57 @@
       <table class="table table-striped">
         <thead>
           <tr>
-              <th> # </th>
-              <th> Nazwa </th>
-              <th> Utwór </th>
-              <th> Ulubiona </th>
+            <th> # </th>
+            <th> Nazwa </th>
+            <th> Utwór </th>
+            <th> Ulubiona </th>
           </tr>
         </thead>
         <tbody>
-            <tr class="" [ngClass]="{'table-active': selected == playlist, 'playlist-row': true}" 
-            [style.borderBottomColor]="playlist.color" 
-            [ngStyle] = "{borderBottomColor:playlist.color}"
-            (click)="selected = playlist">
-                <td> 1 </td>
-                <td> {{ playlist.name }} </td>
-                <td> 23 </td>
-                <td>
-                  <label>
-                    <input type="checkbox" [(ngModel)]="playlist.favourite">
-                  </label>
-                </td>
-            </tr>
+          <tr class="" [ngClass]="{'table-active': selected == playlist, 'playlist-row': true}" [style.borderBottomColor]="playlist.color"
+            [ngStyle]="{borderBottomColor:playlist.color}" (click)="select(playlist)">
+            <td> 1 </td>
+            <td> {{ playlist.name }} </td>
+            <td> 23 </td>
+            <td>
+              <label>
+                <input type="checkbox" [(ngModel)]="playlist.favourite">
+              </label>
+            </td>
+          </tr>
 
-            <tr (click)="selected = null" [ngClass]="{'table-active': selected == null}" >
-                <td> 2 </td>
-                <td> Angular greatest Hits </td>
-                <td> 2 </td>
-                <td> false </td>
-            </tr>
+          <tr (click)="select(null)" [ngClass]="{'table-active': selected == null}">
+            <td> 2 </td>
+            <td> Angular greatest Hits </td>
+            <td> 2 </td>
+            <td> false </td>
+          </tr>
         </tbody>
       </table>
+      <div class="form-group">
+        <button class="btn btn-success flat-xs-right" (click)="createNew($event)">Nowa playlista</button>
+      </div>
     </div>
     <div class="col-xs">
-        <div class="card" *ngIf="selected == null" >
-            <div class="card-block">
-              <h4 class="card-title">Nowa playlista</h4>
-              <p class="card-text">Tworzenie nowej playlisty</p>
-            </div>
-            <div class="card-block">
-                <div class="form-group">
-                  <label>Name: </label>
-                  <input type="text" [(ngModel)] = "edited.name" class="form-control">
-                </div>
-            </div>
+      <div [ngSwitch] = "mode">
+        <div class="card" *ngSwitchDefault>
+          <div class="card-block">
+            <h4 class="card-title">Playlista</h4>
+            <p class="card-text">Wybierz Playlistę</p>
+          </div>
         </div>
-          <div class="card" *ngIf="selected != null" >
+
+        <div class="card" *ngSwitchCase="'selected'">
+          <div class="card-block">
+            <h4 class="card-title">Playlista "{{playlist.name}}"</h4>
+            <p class="card-text">Wybrana Playlista</p>
+            <div class="form-group">
+              <button class="btn btn-success flat-xs-right" (click)="edit(playlist)">Edytuj</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" *ngSwitchCase="'edit'">
           <div class="card-block">
             <h4 class="card-title">Playlista</h4>
             <p class="card-text">Opis listy</p>
@@ -67,25 +74,26 @@
           <div class="card-block">
             <div class="form-group">
               <label>Name: </label>
-                <input type="text" [(ngModel)]="selected.name" class="form-control">
+              <input type="text" [(ngModel)]="selected.name" class="form-control">
             </div>
             <div class="form-group">
               <label>Tracks: </label>
-                <input type="string" [value]="selected.tracks + ' utworów'" [readOnly]="true" class="form-control">
+              <input type="string" [value]="selected.tracks + ' utworów'" [readOnly]="true" class="form-control">
             </div>
             <div class="form-group">
               <label>Color: </label>
-                <input type="color" class="form-control" [(ngModel)]="selected.color">
+              <input type="color" class="form-control" [(ngModel)]="selected.color">
             </div>
             <div class="form-group">
               <label>
-                  <input type="checkbox" [(ngModel)]="selected.favourite"> Favourite: </label>
+                <input type="checkbox" [(ngModel)]="selected.favourite"> Favourite: </label>
             </div>
             <div class="form-group">
               <button class="btn btn-success flat-xs-right" (click)="save($event)">Zapisz</button>
             </div>
           </div>
         </div>
+      </div>
     </div>
   </div>
 </div>
