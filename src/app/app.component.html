@@ -32,7 +32,7 @@
                 <td> 23 </td>
                 <td>
                   <label>
-                    <input type="checkbox" [checked]="playlist.favourite" (change)="playlist.favourite = $event.target.checked">
+                    <input type="checkbox" [(ngModel)]="playlist.favourite">
                   </label>
                 </td>
             </tr>
@@ -55,7 +55,7 @@
           <div class="card-block">
             <div class="form-group">
               <label>Name: </label>
-              <input type="text" [value]="playlist.name" (keyup)="playlist.name = $event.target.value" class="form-control">
+              <input type="text" [(ngModel)]="playlist.name" class="form-control">
             </div>
             <div class="form-group">
               <label>Tracks: </label>
@@ -63,11 +63,11 @@
             </div>
             <div class="form-group">
               <label>Color: </label>
-              <input type="color" class="form-control" [value]="playlist.color" (change)="playlist.color = $event.target.value">
+              <input type="color" class="form-control" [(ngModel)]="playlist.color">
             </div>
             <div class="form-group">
               <label>
-                <input type="checkbox" [checked]="playlist.favourite" (change)="playlist.favourite = $event.target.checked"> Favourite: </label>
+                <input type="checkbox" [(ngModel)]="playlist.favourite"> Favourite: </label>
             </div>
             <div class="form-group">
               <button class="btn btn-success flat-xs-right" (click)="save($event)">Zapisz</button>
