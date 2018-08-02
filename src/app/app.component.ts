@@ -9,6 +9,10 @@ export class AppComponent {
   title = 'Witaj w kursie';
 
   selected = null;
+
+  edited = {
+    
+  }
   
   playlist = {
     name: 'The best of eduweb!',

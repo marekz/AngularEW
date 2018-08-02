@@ -47,12 +47,24 @@
       </table>
     </div>
     <div class="col-xs">
-        <div class="card">
+        <div class="card" *ngIf="selected == null" >
+            <div class="card-block">
+              <h4 class="card-title">Nowa playlista</h4>
+              <p class="card-text">Tworzenie nowej playlisty</p>
+            </div>
+            <div class="card-block">
+                <div class="form-group">
+                  <label>Name: </label>
+                  <input type="text" [(ngModel)] = "edited.name" class="form-control">
+                </div>
+            </div>
+        </div>
+          <div class="card" *ngIf="selected != null" >
           <div class="card-block">
             <h4 class="card-title">Playlista</h4>
             <p class="card-text">Opis listy</p>
           </div>
-          <div *ngIf="selected != null" class="card-block">
+          <div class="card-block">
             <div class="form-group">
               <label>Name: </label>
                 <input type="text" [(ngModel)]="selected.name" class="form-control">
