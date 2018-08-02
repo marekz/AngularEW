@@ -16,16 +16,25 @@ export class AppComponent {
 
   mode = "none";
   
-  playlist = {
-    name: 'The best of eduweb!',
-    tracks: 23,
-    color: '#FF0000',
-    favorite: true
-  }
+  playlists = [
+    {
+      name: 'The best of eduweb!',
+      tracks: 23,
+      color: '#0000FF',
+      favorite: false
+    },
+    {
+      name: 'Angular greatest Hits!',
+      tracks: 2,
+      color: '#FF0000',
+      favorite: true
+    }
+  ]
 
   select(playlist){
+    if(playlist !== this.selected)
+    this.mode = "selected"
     this.selected = playlist;
-    this.mode = "selected";
   }
 
   save(event){
