@@ -52,22 +52,22 @@
             <h4 class="card-title">Playlista</h4>
             <p class="card-text">Opis listy</p>
           </div>
-          <div class="card-block">
+          <div *ngIf="selected != null" class="card-block">
             <div class="form-group">
               <label>Name: </label>
-              <input type="text" [(ngModel)]="playlist.name" class="form-control">
+                <input type="text" [(ngModel)]="selected.name" class="form-control">
             </div>
             <div class="form-group">
               <label>Tracks: </label>
-              <input type="string" [value]="playlist.tracks + ' utworów'" [readOnly]="true" class="form-control">
+                <input type="string" [value]="selected.tracks + ' utworów'" [readOnly]="true" class="form-control">
             </div>
             <div class="form-group">
               <label>Color: </label>
-              <input type="color" class="form-control" [(ngModel)]="playlist.color">
+                <input type="color" class="form-control" [(ngModel)]="selected.color">
             </div>
             <div class="form-group">
               <label>
-                <input type="checkbox" [(ngModel)]="playlist.favourite"> Favourite: </label>
+                  <input type="checkbox" [(ngModel)]="selected.favourite"> Favourite: </label>
             </div>
             <div class="form-group">
               <button class="btn btn-success flat-xs-right" (click)="save($event)">Zapisz</button>
