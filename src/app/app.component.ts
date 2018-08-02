@@ -17,6 +17,13 @@ export class AppComponent {
     favorite: true
   }
 
+  // getPlaylistStyle(playlist){
+  //   return {
+  //     borderBottomColor: playlist.color,
+  //     borderBottomWidth: '2px'
+  //   }
+  // }
+
   save(event){
     console.log('Zapisano', event);
   }
