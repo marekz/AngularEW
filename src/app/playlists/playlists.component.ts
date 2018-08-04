@@ -6,9 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./playlists.component.css']
 })
 export class PlaylistsComponent implements OnInit {
-  
-  ngOnInit(): void {
-  }
 
   selected = null;
 
@@ -19,20 +16,20 @@ export class PlaylistsComponent implements OnInit {
   
   playlists = [
     {
-      name: 'The best of eduweb!',
-      tracks: 23,
-      color: '#0000FF',
-      favorite: false
-    },
-    {
+      id: 1,
       name: 'Angular greatest Hits!',
       tracks: 2,
       color: '#FF0000',
       favorite: true
+    },
+    {
+      id: 2,
+      name: 'The best of eduweb!',
+      tracks: 23,
+      color: '#0000FF',
+      favorite: false
     }
   ]
-
-  constructor() { }
 
   select(playlist){
     if(playlist !== this.selected)
@@ -40,20 +37,39 @@ export class PlaylistsComponent implements OnInit {
     this.selected = playlist;
   }
 
-  save(event){
-    console.log('Zapisano', event);
-  }
-
   edit(playlist){
     this.mode = "edit";
-    this.edited = playlist;
+    this.edited = Object.assign({},playlist);
     this.selected = playlist;
   }
 
   createNew(){
     this.mode = "edit";
-    var newPlayList = {};
+    var newPlayList = {
+      name: '',
+      tracks: 0,
+      color: '#FF0000',
+      favorite: false
+    };
     this.selected = newPlayList;
-    this.edited = newPlayList;
+    this.edited = Object.assign({},newPlayList);
+  }
+
+  save(playlist){
+    if(playlist.id) {
+      let index = this.playlists.findIndex((old_playlist)=>(
+        old_playlist.id === playlist.id
+      ))
+      this.playlists.splice(index, 1, playlist)
+
+    } else {
+      playlist.id = Date.now()
+      this.playlists.push(playlist);
+    }
+  }
+
+  constructor() { }
+  
+  ngOnInit(): void {
   }
 }
