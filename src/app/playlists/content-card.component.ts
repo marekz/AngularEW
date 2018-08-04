@@ -7,6 +7,7 @@ import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
     <div class="card-block">
       <h4 class="card-title">{{title}}</h4>
       <p class="card-text">{{text}}</p>
+      <ng-content></ng-content>
     </div>
   </div>
   `,
