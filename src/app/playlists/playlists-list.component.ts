@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'app-playlist-list',
+  selector: 'app-playlists-list',
   template: `
   <table class="table table-striped">
     <thead>
@@ -32,7 +32,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   `,
   styles: []
 })
-export class PlaylistListComponent implements OnInit {
+export class PlaylistsListComponent implements OnInit {
 
   @Output('selected')
   onSelected = new EventEmitter()
@@ -45,6 +45,7 @@ export class PlaylistListComponent implements OnInit {
   selected;
 
   select(playlist){
+    // console.log(playlist);
     this.onSelected.emit(playlist);
   }
 

@@ -5,10 +5,10 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   template: `
   <div class="card">
     <div class="card-block">
-      <h4 class="card-title">Playlista "{{selected.name}}"</h4>
+      <h4 class="card-title">Playlista "{{playlist.name}}"</h4>
       <p class="card-text">Wybrana Playlista</p>
       <div class="form-group">
-        <button class="btn btn-success flat-xs-right" (click)="edit(selected)">Edytuj</button>
+        <button class="btn btn-success flat-xs-right" (click)="edit(playlist)">Edytuj</button>
       </div>
     </div>
   </div>
