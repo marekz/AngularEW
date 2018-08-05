@@ -8,6 +8,9 @@ import { PlaylistsListComponent } from './playlists-list.component';
 import { PlaylistDetailComponent } from './playlist-detail.component';
 import { PlaylistsService } from './playlists.service';
 
+import PLaylistData from './playlists.data';
+import playlistsData from './playlists.data';
+
 // class SpecialPlaylistService extends PlaylistsService {
 
 // }
@@ -30,7 +33,12 @@ import { PlaylistsService } from './playlists.service';
   ],
   providers: [
     // {provide:PlaylistsService, useClass: SpecialPlaylistService }
-    PlaylistsService
+    PlaylistsService,
+    { provide: 'PlaylistsData', useValue: playlistsData },
+    // { provide: 'PlaylistsData', useFactory: (data)=> {
+    //   data.push({id: 123, name:"Test", color:"red", favorite: false, tracks:2})
+    //   return data;
+    // }, deps:['PlaylistsExampleData']}
   ]
 })
 export class PlaylistsModule { }

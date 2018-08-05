@@ -17,14 +17,11 @@ export class PlaylistsComponent implements OnInit {
   
   playlists = []
 
-  // playlistService:PlaylistsService;
-
   constructor(private playlistService:PlaylistsService) {
-    // this.playlistService = new PlaylistsService();
-    this.playlists = this.playlistService.getPlaylistLists();
   }
  
   ngOnInit(): void {
+    this.playlists = this.playlistService.getPlaylistLists();
   }
 
   select(playlist){
@@ -41,26 +38,12 @@ export class PlaylistsComponent implements OnInit {
 
   createNew(){
     this.mode = "edit";
-    var newPlayList = {
-      name: '',
-      tracks: 0,
-      color: '#FF0000',
-      favorite: false
-    };
+    let newPlayList = this.playlistService.createPlaylist();
     this.selected = newPlayList;
     this.edited = Object.assign({},newPlayList);
   }
 
   save(playlist){
-    if(playlist.id) {
-      let index = this.playlists.findIndex((old_playlist)=>(
-        old_playlist.id === playlist.id
-      ))
-      this.playlists.splice(index, 1, playlist)
-
-    } else {
-      playlist.id = Date.now()
-      this.playlists.push(playlist);
-    }
+    this.playlistService.savePLaylist(playlist);
   }
 }

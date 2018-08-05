@@ -1,30 +1,43 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, Optional } from '@angular/core';
+import playlistsData from './playlists.data';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlaylistsService {
 
+  constructor(@Optional() @Inject('PlaylistsData') playlistsData) {
+    this.playlists = playlistsData == null? this.playlists : playlistsData;
+   }
+
   playlists = [
-    {
-      id: 1,
-      name: 'Angular greatest Hits!',
-      tracks: 2,
-      color: '#FF0000',
-      favorite: true
-    },
-    {
-      id: 2,
-      name: 'The best of eduweb!',
-      tracks: 23,
-      color: '#0000FF',
-      favorite: false
-    }
   ]
 
   getPlaylistLists(){
     return this.playlists;
   }
 
-  constructor() { }
+  savePLaylist(playlist){
+    if(playlist.id) {
+      let index = this.playlists.findIndex((old_playlist)=>(
+        old_playlist.id === playlist.id
+      ))
+      this.playlists.splice(index, 1, playlist)
+
+    } else {
+      playlist.id = Date.now()
+      this.playlists.push(playlist);
+    }
+  }
+
+  createPlaylist(){
+    var newPlayList = {
+      name: '',
+      tracks: 0,
+      color: '#FF0000',
+      favorite: false
+    };
+
+    return Object.assign({}, newPlayList);
+  }
 }
