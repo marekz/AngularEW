@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { PlaylistsService } from './playlists.service';
 
 @Component({
   selector: 'app-playlists',
@@ -14,22 +15,17 @@ export class PlaylistsComponent implements OnInit {
 
   mode = "none";
   
-  playlists = [
-    {
-      id: 1,
-      name: 'Angular greatest Hits!',
-      tracks: 2,
-      color: '#FF0000',
-      favorite: true
-    },
-    {
-      id: 2,
-      name: 'The best of eduweb!',
-      tracks: 23,
-      color: '#0000FF',
-      favorite: false
-    }
-  ]
+  playlists = []
+
+  // playlistService:PlaylistsService;
+
+  constructor(private playlistService:PlaylistsService) {
+    // this.playlistService = new PlaylistsService();
+    this.playlists = this.playlistService.getPlaylistLists();
+  }
+ 
+  ngOnInit(): void {
+  }
 
   select(playlist){
     if(playlist !== this.selected)
@@ -66,10 +62,5 @@ export class PlaylistsComponent implements OnInit {
       playlist.id = Date.now()
       this.playlists.push(playlist);
     }
-  }
-
-  constructor() { }
-  
-  ngOnInit(): void {
   }
 }
