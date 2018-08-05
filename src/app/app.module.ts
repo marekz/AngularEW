@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { PlaylistsModule } from './playlists/playlists.module';
 import { AppComponent } from './app.component';
 import { AuthService } from './auth.service';
+import { MusicSearchModule } from './music-search/music-search.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { AuthService } from './auth.service';
     BrowserModule,
     FormsModule,
     HttpModule,
-    PlaylistsModule
+    PlaylistsModule,
+    MusicSearchModule
   ],
   providers: [],
   bootstrap: [AppComponent]
