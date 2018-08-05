@@ -7,6 +7,7 @@ import playlistsData from './playlists.data';
 export class PlaylistsService {
 
   constructor(@Optional() @Inject('PlaylistsData') playlistsData) {
+    console.log('PlaylistsService', this);
     this.playlists = playlistsData == null? this.playlists : playlistsData;
    }
 

@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { PlaylistsModule } from './playlists/playlists.module';
 import { AppComponent } from './app.component';
+import { AuthService } from './auth.service';
 
 @NgModule({
   declarations: [
@@ -18,4 +19,8 @@ import { AppComponent } from './app.component';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+  constructor(private auth:AuthService){
+    auth.getToken();
+  }
+}

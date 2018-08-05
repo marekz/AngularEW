@@ -8,7 +8,6 @@ import { PlaylistsListComponent } from './playlists-list.component';
 import { PlaylistDetailComponent } from './playlist-detail.component';
 import { PlaylistsService } from './playlists.service';
 
-import PLaylistData from './playlists.data';
 import playlistsData from './playlists.data';
 
 // class SpecialPlaylistService extends PlaylistsService {
