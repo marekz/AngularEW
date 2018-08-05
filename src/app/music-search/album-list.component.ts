@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MusicSearchService } from './music-search.service';
 
 @Component({
   selector: 'app-album-list',
@@ -13,34 +14,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AlbumListComponent implements OnInit {
 
-  albums = [
-    {
-      name:'Album 1',
-      images:[
-        {
-          url:'http://placehold.it/640x640'
-        }
-      ]
-    },{
-      name:'Album 2',
-      images:[
-        {
-          url:'http://placehold.it/640x640'
-        }
-      ]
-    },{
-      name:'Album 3',
-      images:[
-        {
-          url:'http://placehold.it/640x640'
-        }
-      ]
-    }
-  ];
+  albums = [];
 
-  constructor() { }
+  constructor(private musicSearch:MusicSearchService) { }
 
   ngOnInit() {
+    this.musicSearch.getAlbums((albums)=>{
+      this.albums = albums
+    });
+    
   }
 
 }
