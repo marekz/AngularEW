@@ -1,0 +1,6 @@
+export default [
+    {
+        client_id: 'your_slient_IP',
+        redirect_uri: 'http://localhost:4200/'
+    }
+]
