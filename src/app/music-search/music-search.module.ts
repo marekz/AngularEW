@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms';
 
 import { MusicSearchComponent } from './music-search.component';
 import { AlbumListComponent } from './album-list.component';
@@ -10,12 +11,15 @@ import { AlbumSearchFormComponent } from './album-search-form.component';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    HttpModule,
+    FormsModule
   ],
   declarations: [
     MusicSearchComponent, 
     AlbumListComponent, 
-    AlbumCardComponent, AlbumSearchFormComponent
+    AlbumCardComponent, 
+    AlbumSearchFormComponent
   ],
   exports: [
     MusicSearchComponent  
