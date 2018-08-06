@@ -8,6 +8,7 @@ export class MusicSearchService {
 
   albums = [];
   constructor(private http: Http) {
+    
    }
 
   search(query, callback){

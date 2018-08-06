@@ -6,6 +6,7 @@ import { MusicSearchComponent } from './music-search.component';
 import { AlbumListComponent } from './album-list.component';
 import { AlbumCardComponent } from './album-card.component';
 import { MusicSearchService } from './music-search.service';
+import { AlbumSearchFormComponent } from './album-search-form.component';
 
 @NgModule({
   imports: [
@@ -14,7 +15,7 @@ import { MusicSearchService } from './music-search.service';
   declarations: [
     MusicSearchComponent, 
     AlbumListComponent, 
-    AlbumCardComponent
+    AlbumCardComponent, AlbumSearchFormComponent
   ],
   exports: [
     MusicSearchComponent  
