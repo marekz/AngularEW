@@ -16,17 +16,22 @@ export class MusicSearchService {
   }
 
   getAlbumsStream(){
-    return Observable.from(this.albumsStream)
+    return Observable
+      .from(this.albumsStream)
+      .startWith(this.albums)
+
   }
 
   search(query){
     let url = `https://api.spotify.com/v1/search?type=album&market=PL&query=${query}`;
 
-    this.http.get(url).subscribe((response:Response)=>{
+    this.http.get(url)
+    .map((response:Response)=>{
       let data = response.json();
-      let albums = data.albums.items;
-      this.albums = albums;
-
+      return data.albums.items;
+    })
+    .do(albums => { this.albums = albums })
+    .subscribe(albums=>{
       this.albumsStream.next(this.albums);
     })
   }

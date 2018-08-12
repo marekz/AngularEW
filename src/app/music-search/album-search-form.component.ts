@@ -1,15 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { MusicSearchService } from './music-search.service';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-album-search-form',
   template: `
-    <form (ngSubmit)="search(query)">
+    <form [formGroup]="searchForm">
       <div class="input-group">
-        <input type="text" name="query" [(ngModel)]="query"  class="form-control" placeholder="Słowa kluczowe" />
-        <span class="input-group-btn">
-          <button type="submit" class="btn bt-outline-primary">Szukaj</button>
-        </span>
+        <input type="text" formControlName="query" class="form-control" placeholder="Słowa kluczowe" />
       </div>
     </form>
   `,
@@ -17,13 +15,27 @@ import { MusicSearchService } from './music-search.service';
 })
 export class AlbumSearchFormComponent implements OnInit {
 
-  constructor(private musicSearch:MusicSearchService) { }
+  searchForm: FormGroup;
 
-  ngOnInit() {
+  constructor(private musicSearch:MusicSearchService) { 
+    this.searchForm = new FormGroup({
+      'query': new FormControl('Batman')
+    })
+
+    this.searchForm.get('query').valueChanges
+      .filter(query => query.length >=3 )
+      .distinctUntilChanged()
+      .debounceTime(400)
+      .subscribe(query => {
+        this.musicSearch.search(query)
+    })
   }
 
   search(query){
     this.musicSearch.search(query)
+  }
+
+  ngOnInit() {
   }
 
 }
