@@ -19,7 +19,6 @@ import { PlaylistsService } from './playlists.service'
 })
 export class PlaylistDetailComponent implements OnInit {
 
-  @Input()
   playlist;
 
   @Output('editplaylist')
