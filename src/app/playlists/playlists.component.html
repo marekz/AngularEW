@@ -1,32 +1,26 @@
-<style>
-    .playlist-row {
-      border-bottom: 2px solid transparent;
-    }
-  </style>
-  <div class="row mt-1">
-    <div class="col-xs">
-      <h4 class="card-title">Playlisty</h4>
-
-      <app-playlists-list [selected]="selected" (selected)=" select($event) " [playlists]="playlists"></app-playlists-list>
-      
-      <div class="form-group">
-        <button class="btn btn-success flat-xs-right" (click)="createNew($event)">Nowa playlista</button>
-      </div>
-    </div>
-    <div class="col-xs">
-      
-      <div [ngSwitch] = "mode">
-        <app-content-card title="Playlista" *ngSwitchDefault>
-          <p>Wybierz <b>playlistę</b></p>
-        </app-content-card>
-
-        <app-content-card title="Playlista {{selected.name}}" *ngSwitchCase="'selected'">
-          <app-playlist-detail [playlist]="selected" (editplaylist)="edit($event)" *ngSwitchCase="'selected'"></app-playlist-detail>
-        </app-content-card>
-
-        <app-content-card title="Playlista {{selected.name}} - edycja" *ngSwitchCase="'edit'">
-          <app-playlist-form [playlist]="edited" (saved)=save($event)></app-playlist-form>
-        </app-content-card>
-      </div>
+<div class="row mt-1">
+  <div class="col-xs">
+    <h4 class="display-3 float-xs-right mb-2">Twoje playlisty</h4>
+  </div>
+</div>
+<div class="row mt-1">
+  <div class="col-xs">
+    <div [ngSwitch] = "mode">
+      <app-content-card title="Playlista" *ngSwitchDefault>
+        <p>Wybierz <b>playlistę</b></p>
+      </app-content-card>
+      <app-content-card title="Playlista {{selected.name}}" *ngSwitchCase="'selected'">
+        <app-playlist-detail [playlist]="selected" (editplaylist)="edit($event)" *ngSwitchCase="'selected'"></app-playlist-detail>
+      </app-content-card>
+      <app-content-card title="Playlista {{selected.name}} - edycja" *ngSwitchCase="'edit'">
+        <app-playlist-form [playlist]="edited" (saved)=save($event)></app-playlist-form>
+      </app-content-card>
     </div>
   </div>
+  <div class="col-xs">
+    <app-playlists-list [selected]="selected" (selected)=" select($event) " [playlists]="playlists"></app-playlists-list>
+    <div class="form-group">
+      <button class="btn btn-success flat-xs-right" (click)="createNew($event)">Nowa playlista</button>
+    </div>
+  </div>
+</div>

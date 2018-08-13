@@ -8,6 +8,6 @@ const routesConfig:Routes = [
 ]
 
 export const routerModule = RouterModule.forRoot(routesConfig, {
-  enableTracing: true,
-  useHash: true
+  // enableTracing: true,
+  // useHash: true
 });
