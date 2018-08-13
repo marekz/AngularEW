@@ -17,7 +17,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
         class="playlist-row" 
         [ngClass]="{'table-active': selected == playlist}" 
         [ngStyle]="{borderBottomColor:playlist.color}" 
-        (click)="select(playlist)">
+        [routerLink]="[playlist.id]">
         <td> {{ i+1 }} </td>
         <td> {{ playlist.name }} </td>
         <td> {{ playlist.tracks }} </td>
