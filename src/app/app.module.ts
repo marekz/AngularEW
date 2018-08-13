@@ -6,6 +6,20 @@ import { PlaylistsModule } from './playlists/playlists.module';
 import { AppComponent } from './app.component';
 import { AuthService } from './auth.service';
 import { MusicSearchModule } from './music-search/music-search.module';
+import { RouterModule, Routes } from '@angular/router';
+
+import { PlaylistsComponent } from './playlists/playlists.component';
+import { MusicSearchComponent } from './music-search/music-search.component';
+
+const routesConfig:Routes = [
+  { path:'', component: PlaylistsComponent },
+  { path:'music', component: MusicSearchComponent }
+]
+
+const routerModule = RouterModule.forRoot(routesConfig, {
+  enableTracing: true,
+  useHash: true
+});
 
 @NgModule({
   declarations: [
@@ -16,7 +30,8 @@ import { MusicSearchModule } from './music-search/music-search.module';
     FormsModule,
     HttpModule,
     PlaylistsModule,
-    MusicSearchModule
+    MusicSearchModule,
+    routerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
