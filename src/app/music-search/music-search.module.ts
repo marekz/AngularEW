@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { routerModule } from './music-search.routing';
+
 import { MusicSearchComponent } from './music-search.component';
 import { AlbumListComponent } from './album-list.component';
 import { AlbumCardComponent } from './album-card.component';
@@ -14,7 +16,8 @@ import { AlbumSearchFormComponent } from './album-search-form.component';
     CommonModule,
     HttpModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    routerModule
   ],
   declarations: [
     MusicSearchComponent, 

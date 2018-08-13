@@ -7,7 +7,7 @@ import { PlaylistFormComponent } from './playlist-form.component';
 import { PlaylistsListComponent } from './playlists-list.component';
 import { PlaylistDetailComponent } from './playlist-detail.component';
 import { PlaylistsService } from './playlists.service';
-
+import { routerModule } from './playlists.routing';
 import playlistsData from './playlists.data';
 
 // class SpecialPlaylistService extends PlaylistsService {
@@ -19,6 +19,7 @@ import playlistsData from './playlists.data';
   imports: [
     CommonModule,
     FormsModule,
+    routerModule
   ],
   declarations: [
     PlaylistsComponent,
