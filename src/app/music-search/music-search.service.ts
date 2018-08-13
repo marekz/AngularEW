@@ -12,7 +12,7 @@ export class MusicSearchService {
   albumsStream = new Subject();
 
   constructor(private http: Http) {
-    
+    this.search('batman');
   }
 
   getAlbumsStream(){
@@ -20,6 +20,12 @@ export class MusicSearchService {
       .from(this.albumsStream)
       .startWith(this.albums)
 
+  }
+
+  getAlbum(id){
+    let url = `https://api.spotify.com/v1/albums/${id}`;
+    return this.http.get(url)
+      .map((response:Response)=> response.json());
   }
 
   search(query){

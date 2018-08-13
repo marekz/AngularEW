@@ -10,6 +10,8 @@ import { AlbumListComponent } from './album-list.component';
 import { AlbumCardComponent } from './album-card.component';
 import { MusicSearchService } from './music-search.service';
 import { AlbumSearchFormComponent } from './album-search-form.component';
+import { AlbumDetailsComponent } from './album-details.component';
+import { TrackListComponent } from './track-list.component';
 
 @NgModule({
   imports: [
@@ -23,7 +25,8 @@ import { AlbumSearchFormComponent } from './album-search-form.component';
     MusicSearchComponent, 
     AlbumListComponent, 
     AlbumCardComponent, 
-    AlbumSearchFormComponent
+    AlbumSearchFormComponent, 
+    AlbumDetailsComponent, TrackListComponent
   ],
   exports: [
     MusicSearchComponent  
