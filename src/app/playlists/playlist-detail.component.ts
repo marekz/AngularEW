@@ -11,7 +11,7 @@ import { PlaylistsService } from './playlists.service'
   <div *ngIf="playlist">
     <h3 class="card-title">{{ playlist.name }}</h3>
     <div class="form-group">
-      <button class="btn btn-success flat-xs-right" (click)="edit(playlist)">Edytuj</button>
+      <button class="btn btn-default flat-xs-right" (click)="edit(playlist)">Edytuj</button>
     </div>
   </div>
   `,
@@ -30,10 +30,13 @@ export class PlaylistDetailComponent implements OnInit {
 
   constructor(private activeRoute:ActivatedRoute,
               private playlistsService: PlaylistsService ) {
-    let id = parseInt(activeRoute.snapshot.params['id']);
-    if(id){
-      this.playlist = this.playlistsService.getPlaylist(id)
-    }
+
+    this.activeRoute.params.subscribe(params => {
+      let id = parseInt(params['id']);
+      if(id){
+        this.playlist = this.playlistsService.getPlaylist(id)
+      }
+    })
   }
 
   ngOnInit() {
