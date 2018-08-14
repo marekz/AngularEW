@@ -1,5 +1,5 @@
-import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { PlaylistsService } from './playlists.service'
 
 @Component({
@@ -11,7 +11,7 @@ import { PlaylistsService } from './playlists.service'
   <div *ngIf="playlist">
     <h3 class="card-title">{{ playlist.name }}</h3>
     <div class="form-group">
-      <button class="btn btn-default flat-xs-right" (click)="edit(playlist)">Edytuj</button>
+      <button class="btn btn-default float-xs-right" (click)="edit(playlist)">Edytuj</button>
     </div>
   </div>
   `,
@@ -21,16 +21,16 @@ export class PlaylistDetailComponent implements OnInit {
 
   playlist;
 
-  @Output('editplaylist')
-  emiter = new EventEmitter()
-
   edit(playlist){
-    this.emiter.emit(playlist);
+    this.router.navigate(['playlist',playlist.id,'edit']);
   }
 
   constructor(private activeRoute:ActivatedRoute,
-              private playlistsService: PlaylistsService ) {
+              private playlistsService: PlaylistsService,
+              private router:Router ) {
+  }
 
+  ngOnInit() {
     this.activeRoute.params.subscribe(params => {
       let id = parseInt(params['id']);
       if(id){
@@ -38,8 +38,4 @@ export class PlaylistDetailComponent implements OnInit {
       }
     })
   }
-
-  ngOnInit() {
-  }
-
 }
