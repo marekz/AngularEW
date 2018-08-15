@@ -39,7 +39,14 @@ import { PlaylistsService } from './playlists.service'
       </form>
     </div>
   `,
-  styles: []
+  styles: [`
+  input.ng-dirty.ng-invalid, 
+  textarea.ng-dirty.ng-invalid,
+  input.ng-touched.ng-invalid, 
+  textarea.ng-touched.ng-invalid {
+      border: 1px solid red;
+    }
+  `]
 })
 export class PlaylistFormComponent implements OnInit {
 
