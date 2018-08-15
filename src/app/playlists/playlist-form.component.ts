@@ -6,26 +6,27 @@ import { PlaylistsService } from './playlists.service'
   selector: 'app-playlist-form',
   template: `
     <div *ngIf="playlist">
-      <div class="form-group">
-        <label>Name: </label>
-        <input type="text" [(ngModel)]="playlist.name" class="form-control">
-      </div>
-      <div class="form-group">
-        <label>Tracks: </label>
-        <input type="string" [value]="playlist.tracks + ' utworów'" [readOnly]="true" class="form-control">
-      </div>
-      <div class="form-group">
-        <label>Color: </label>
-        <input type="color" class="form-control" [(ngModel)]="playlist.color">
-      </div>
-      <div class="form-group">
-        <label>
-          <input type="checkbox" [(ngModel)]="playlist.favourite"> Favourite: </label>
-      </div>
-      <div class="form-group">
-        <button class="btn btn-success flat-xs-right" 
-          (click)="save(playlist)">Zapisz</button>
-      </div>
+      <form #formRef="ngForm" novalidate="true" (ngSubmit)="save(formRef.valid, playlist)">
+        <div class="form-group">
+          <label>Name: </label>
+          <input type="text" #nameRef="ngModel" required minlength="3" [(ngModel)]="playlist.name" name="name"class="form-control">
+        </div>
+        <div class="form-group">
+          <label>Opis</label>
+          <textarea #descriptionRef="ngModel" [(ngModel)]="playlist.description" name="description" class="form-control" max-lengrth="200"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Color: </label>
+          <input type="color" class="form-control" [(ngModel)]="playlist.color" name="color">
+        </div>
+        <div class="form-group">
+          <label>
+            <input type="checkbox" [(ngModel)]="playlist.favourite" name="favourite"> Favourite: </label>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-success flat-xs-right" type="submit">Zapisz</button>
+        </div>
+      </form>
     </div>
   `,
   styles: []
@@ -35,9 +36,12 @@ export class PlaylistFormComponent implements OnInit {
   @Input()
   playlist;
 
-  save(playlist){
-    this.playlistsService.savePLaylist(playlist);
-    this.router.navigate(['playlist', playlist.id]);
+  save(valid, playlist){
+    if(!valid) {
+      return
+    }
+    // this.playlistsService.savePLaylist(playlist);
+    // this.router.navigate(['playlist', playlist.id]);
   }
 
   constructor(private activeRoute:ActivatedRoute,
