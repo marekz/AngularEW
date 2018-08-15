@@ -10,6 +10,16 @@ import { PlaylistsService } from './playlists.service'
         <div class="form-group">
           <label>Name: </label>
           <input type="text" #nameRef="ngModel" required minlength="3" [(ngModel)]="playlist.name" name="name"class="form-control">
+          <div class="has-danger" *ngIf="nameRef.touched || nameRef.dirty || formRef.submitted">
+            <div class="form-control-feedback" 
+                  *ngIf="nameRef.errors?.required">
+                  To pole jest wymagane
+            </div>
+            <div class="form-control-feedback" 
+                  *ngIf="nameRef.errors?.minlength">
+                  To pole musi mieć przynajmniej {{ nameRef.errors.minlength.requiredLength }} znaki
+            </div>
+          </div>
         </div>
         <div class="form-group">
           <label>Opis</label>
