@@ -25,6 +25,24 @@ import { PlaylistsService } from './playlists.service'
           <label>Opis</label>
           <textarea #descriptionRef="ngModel" [(ngModel)]="playlist.description" name="description" class="form-control" max-lengrth="200"></textarea>
         </div>
+
+
+        <div class="form-group">
+          <label>Kategoria:</label>
+          <select class="form-control" [(ngModel)]="playlist.category" name="category">
+            <option *ngFor="let category of categories" [value]="category">{{category}}</option>
+          </select>
+        </div>
+
+
+        <!-- <div class="form-group">
+          <label>Kategoria:</label>
+          <div *ngFor="let category of categories">
+            <label class="form-check-input">
+              <input type="radio" [(ngModel)]="playlist.category" name="category" [value]="category"> {{ category }} 
+            </label>
+          </div>
+        </div> -->
         <div class="form-group">
           <label>Color: </label>
           <input type="color" class="form-control" [(ngModel)]="playlist.color" name="color">
@@ -37,6 +55,7 @@ import { PlaylistsService } from './playlists.service'
           <button class="btn btn-success flat-xs-right" type="submit">Zapisz</button>
         </div>
       </form>
+      {{ playlist | json }}
     </div>
   `,
   styles: [`
@@ -50,6 +69,10 @@ import { PlaylistsService } from './playlists.service'
 })
 export class PlaylistFormComponent implements OnInit {
 
+  categories = [
+    'Filmowa', 'Rockowa', 'Inne'
+  ];
+
   @Input()
   playlist;
 
@@ -57,8 +80,8 @@ export class PlaylistFormComponent implements OnInit {
     if(!valid) {
       return
     }
-    // this.playlistsService.savePLaylist(playlist);
-    // this.router.navigate(['playlist', playlist.id]);
+    this.playlistsService.savePLaylist(playlist);
+    this.router.navigate(['playlist', playlist.id]);
   }
 
   constructor(private activeRoute:ActivatedRoute,
