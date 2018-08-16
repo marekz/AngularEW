@@ -33,8 +33,8 @@ import playlistsData from './playlists.data';
   ],
   providers: [
     // {provide:PlaylistsService, useClass: SpecialPlaylistService }
-    PlaylistsService,
-    { provide: 'PlaylistsData', useValue: playlistsData },
+    // PlaylistsService,
+    // { provide: 'PlaylistsData', useValue: playlistsData },
     // { provide: 'PlaylistsData', useFactory: (data)=> {
     //   data.push({id: 123, name:"Test", color:"red", favorite: false, tracks:2})
     //   return data;

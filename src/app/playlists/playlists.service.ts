@@ -20,8 +20,16 @@ export class PlaylistsService {
 
   }
 
-  playlists = [
-  ]
+  playlists = [ ]
+
+  addToPlaylist(playlistId, track){
+    let playlist = this.playlists.find(playlist => playlist.id == playlistId)
+    playlist.tracks.push(track);
+    this.savePLaylist(playlist)
+      .subscribe(()=>{
+        
+      })
+  }
 
   getPlaylistLists(){
     return this.playlists;

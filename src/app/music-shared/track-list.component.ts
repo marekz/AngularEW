@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { PlaylistsService } from '../playlists/playlists.service';
+
 
 @Component({
   selector: 'app-track-list',
@@ -29,7 +31,7 @@ export class TrackListComponent implements OnInit {
 
   @Input()
   tracks;
-  constructor() { }
+  constructor( private playlistService: PlaylistsService) { }
 
   ngOnInit() {
   }

@@ -8,6 +8,8 @@ import { AuthService } from './auth.service';
 import { MusicSearchModule } from './music-search/music-search.module';
 import { routerModule } from './app.routing';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { PlaylistsService } from './playlists/playlists.service';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
     MusicSearchModule,
     routerModule
   ],
-  providers: [],
+  providers: [
+    PlaylistsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { 
