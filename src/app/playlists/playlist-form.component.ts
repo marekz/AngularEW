@@ -1,6 +1,6 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { PlaylistsService } from './playlists.service'
+import { PlaylistsService, Playlist } from './playlists.service'
 
 @Component({
   selector: 'app-playlist-form',
@@ -32,13 +32,13 @@ import { PlaylistsService } from './playlists.service'
 })
 export class PlaylistFormComponent implements OnInit {
 
-  @Input()
-  playlist;
+  playlist:Playlist;
 
   save(playlist){
-    this.playlistsService.savePLaylist(playlist);
-    this.router.navigate(['playlist', playlist.id]);
-  }
+    this.playlistsService.savePLaylist(playlist)
+    .subscribe(playlist => {
+      this.router.navigate(['playlist', playlist.id]);
+    })}
 
   constructor(private activeRoute:ActivatedRoute,
     private playlistsService: PlaylistsService,
@@ -48,8 +48,10 @@ export class PlaylistFormComponent implements OnInit {
     this.activeRoute.params.subscribe(params => {
       let id = parseInt(params['id']);
       if(id){
-        let playlist = this.playlistsService.getPlaylist(id);
-        this.playlist = Object.assign({},playlist);
+        this.playlistsService.getPlaylist(id)
+          .subscribe((playlist:Playlist) => {
+            this.playlist = Object.assign({},playlist)
+          })
       } else {
         this.playlist = this.playlistsService.createPlaylist();
       }

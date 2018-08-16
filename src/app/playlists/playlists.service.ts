@@ -1,15 +1,24 @@
 import { Injectable, Inject, Optional } from '@angular/core';
-import playlistsData from './playlists.data';
+import { Http } from '@angular/http';
+import { Subject, Observable } from 'rxjs';
+
+export interface Playlist {
+  name: string,
+  tracks: any[],
+  color: string,
+  favourite: boolean
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlaylistsService {
 
-  constructor(@Optional() @Inject('PlaylistsData') playlistsData) {
-    console.log('PlaylistsService', this);
-    this.playlists = playlistsData == null? this.playlists : playlistsData;
-   }
+  server_url = 'http://localhost:3000/playlists/';
+
+  constructor(private http:Http) {
+
+  }
 
   playlists = [
   ]
@@ -18,31 +27,49 @@ export class PlaylistsService {
     return this.playlists;
   }
 
-  getPlaylist(id){
-    return this.playlists.find(playlist => playlist.id === id);
+  getPlaylists(){
+    return this.http.get(this.server_url)
+          .map( response => response.json() )
+          .subscribe( playlists => {
+            this.playlists = playlists;
+            this.playlistStream$.next(this.playlists)
+          });
+  }
+
+  playlistStream$ = new Subject<Playlist[]>();
+
+  getPlaylistStream(){
+    if(!this.playlists.length){
+      this.getPlaylists()
+    }
+    return this.playlistStream$.startWith(this.playlists);
   }
 
   savePLaylist(playlist){
+    let request;
     if(playlist.id) {
-      let index = this.playlists.findIndex((old_playlist)=>(
-        old_playlist.id === playlist.id
-      ))
-      this.playlists.splice(index, 1, playlist)
-
+      request = this.http.put(this.server_url + playlist.id, playlist)
     } else {
-      playlist.id = Date.now()
-      this.playlists.push(playlist);
+      request = this.http.put(this.server_url, playlist)
     }
+
+    return request.map(response => response.json())
+      .do( playlist => {
+        this.getPlaylists()
+      })
   }
 
-  createPlaylist(){
-    var newPlayList = {
+  createPlaylist(): Playlist {
+    return {
       name: '',
-      tracks: 0,
+      tracks: [],
       color: '#FF0000',
-      favorite: false
+      favourite: false
     };
+  }
 
-    return Object.assign({}, newPlayList);
+  getPlaylist(id){
+    return this.http.get(this.server_url + id)
+      .map(response => response.json())
   }
 }
